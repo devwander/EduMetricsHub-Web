@@ -1,5 +1,6 @@
 export * from "./auth.model";
 export * from "./base.model";
+export * from "./discipline.model";
 export * from "./icon.model";
 export * from "./params.model";
 export * from "./route.model";

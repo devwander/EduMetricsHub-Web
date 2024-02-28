@@ -5,3 +5,5 @@ export interface Query {
 }
 
 export interface QueryStudent extends Query {}
+
+export interface QueryDiscipline extends Query {}

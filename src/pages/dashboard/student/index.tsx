@@ -11,10 +11,8 @@ export function Student(): ReactElement {
       <Typography>ESTUDANTES</Typography>
       {isSuccess && (
         <ul>
-          {students.data.map((student: Student) => (
-            <>
-              <li key={student.id}>{student.nome}</li>
-            </>
+          {students.map((student: Student) => (
+            <li key={student.id}>{student.nome}</li>
           ))}
         </ul>
       )}
