@@ -1,4 +1,4 @@
-import { Cardholder, House, UsersThree } from "@phosphor-icons/react";
+import { Cardholder, House, Users, UsersThree } from "@phosphor-icons/react";
 
 import type { Route } from "@/models";
 
@@ -17,5 +17,10 @@ export const Routes: Route[] = [
     icon: Cardholder,
     pathname: "disciplines",
     label: "Disciplinas",
+  },
+  {
+    icon: Users,
+    pathname: "users",
+    label: "Usuários",
   },
 ];

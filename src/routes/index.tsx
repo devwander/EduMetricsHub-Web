@@ -30,6 +30,12 @@ const DisciplineRouter = lazy(() =>
   }))
 );
 
+const UserRouter = lazy(() =>
+  import("@/pages/dashboard/user/router").then((module) => ({
+    default: module.Router,
+  }))
+);
+
 export function Router(): ReactElement {
   const navigate = useNavigate();
   const { logged } = authStore.getState().load();
@@ -91,7 +97,8 @@ export function Router(): ReactElement {
             <Route element={<Dashboard />}>
               <Route path="home/*" element={<HomeRouter />} />
               <Route path="students/*" element={<StudentRouter />} />
-              <Route path="disciplines" element={<DisciplineRouter />} />
+              <Route path="disciplines/*" element={<DisciplineRouter />} />
+              <Route path="users/*" element={<UserRouter />} />
             </Route>
           </Route>
         )}

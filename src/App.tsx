@@ -1,5 +1,4 @@
 import { CssBaseline } from "@mui/material";
-import { ptBR } from "@mui/x-date-pickers";
 import { QueryClientProvider } from "@tanstack/react-query";
 import type { ReactElement } from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -10,8 +9,8 @@ import { ThemeProvider } from "./context";
 import { tanstack } from "./lib";
 import { Router } from "./routes";
 
-const LOCALE_TEXT =
-  ptBR.components.MuiLocalizationProvider.defaultProps.localeText;
+// const LOCALE_TEXT =
+//   ptBR.components.MuiLocalizationProvider.defaultProps.localeText;
 
 export function App(): ReactElement {
   return (
