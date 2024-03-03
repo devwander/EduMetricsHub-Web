@@ -75,7 +75,6 @@ export function Form(): ReactElement {
     isError,
   } = useSigninMutation({
     onError(error) {
-      console.log(error);
       toast.error("Error ao efetuar login.");
 
       setError("email", {

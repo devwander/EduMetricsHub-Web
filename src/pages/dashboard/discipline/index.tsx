@@ -1,22 +1,25 @@
-import { ListElement } from "@/components";
+import { InputSearch, ListElement } from "@/components";
 import ButtonsOptions from "@/components/buttons-options";
 import { useDisciplinePaginateQuery } from "@/query";
-import { disciplineFilterStore } from "@/store";
+import { disciplineFilterStore, searchStore } from "@/store";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ListIcon from "@mui/icons-material/List";
-import { Grid, Pagination } from "@mui/material";
+import { Box, Grid, Pagination } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState, type ReactElement } from "react";
 import { Table } from "./table";
 
 export function Discipline(): ReactElement {
+  const { search } = searchStore();
   const { append, params } = disciplineFilterStore();
+
   const [part, setPart] = useState("list");
 
   const { data: disciplines, isSuccess: isSuccessList } =
     useDisciplinePaginateQuery({
       ...params,
+      search,
     });
 
   const list: ListElement[] = [
@@ -44,11 +47,22 @@ export function Discipline(): ReactElement {
       </Grid>
 
       <Grid item xs={12}>
-        {part === "list" && isSuccessList && disciplines.data.length > 0 && (
-          <>
+        <InputSearch placeholder="Pesquise por nome ou código" />
+      </Grid>
+
+      <Grid item xs={12}>
+        {part === "list" && isSuccessList && (
+          <Box>
             <Stack>
               <Table
-                labels={["Nome", "Código", "Tipo", "Créditos", "Carga Horária"]}
+                labels={[
+                  "Nome",
+                  "Código",
+                  "Tipo",
+                  "Créditos",
+                  "Carga Horária",
+                  "",
+                ]}
                 data={disciplines.data}
               />
             </Stack>
@@ -71,7 +85,7 @@ export function Discipline(): ReactElement {
                 />
               </Stack>
             )}
-          </>
+          </Box>
         )}
       </Grid>
     </Grid>

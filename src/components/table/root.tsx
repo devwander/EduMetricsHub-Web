@@ -9,9 +9,8 @@ export function Root({ children, ...rest }: RootProps): ReactElement {
     <TableContainer
       component={Paper}
       sx={{
-        marginTop: "2rem",
         boxShadow: "none",
-        borderRadius: "1.5rem 1.5rem 0rem 0rem",
+        borderRadius: "10px",
         background: "transparent",
       }}
     >

@@ -6,12 +6,13 @@ export default class DisciplineService {
   public async paginate(
     params: Partial<QueryDiscipline>
   ): Promise<Paginate<Discipline>> {
-    const { page, perPage } = params;
+    const { page, perPage, search } = params;
 
     const { data: pagination } = await api.get<any>(`university/disciplines`, {
       params: {
         page,
         perPage,
+        search,
       },
     });
     return pagination;

@@ -3,7 +3,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Box from "@mui/material/Box";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-import React, { createElement } from "react";
+import React, { createElement, useEffect } from "react";
 
 interface ButtonsOptionsProps {
   onChange: (value: string) => void;
@@ -20,7 +20,13 @@ export default function ButtonsOptions({
   list,
   onChange,
 }: ButtonsOptionsProps) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState<string>("");
+
+  useEffect(() => {
+    if (list[0].value) {
+      setValue(list[0].value);
+    }
+  });
 
   return (
     <Box>
@@ -29,7 +35,6 @@ export default function ButtonsOptions({
         showLabels
         value={value}
         onChange={(event, newValue) => {
-          console.log(newValue);
           setValue(newValue);
           if (onChange) {
             onChange(newValue);
