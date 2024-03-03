@@ -17,4 +17,9 @@ export default class DisciplineService {
     });
     return pagination;
   }
+
+  public async show(id: string | number): Promise<Discipline> {
+    const { data } = await api.get<Discipline>(`university/discipline/${id}`);
+    return data;
+  }
 }

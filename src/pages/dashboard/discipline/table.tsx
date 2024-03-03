@@ -5,6 +5,7 @@ import { Table as T } from "@/components";
 import { Color } from "@/lib";
 import { Discipline } from "@/models";
 import { modalStore } from "@/store/modal.store";
+import { disciplineType } from "@/utils/format";
 import { Stack } from "@mui/material";
 import { ClipboardText } from "@phosphor-icons/react";
 
@@ -76,7 +77,7 @@ export function Table({ labels, data }: Props): ReactElement {
                   WebkitBoxOrient: "vertical",
                 }}
               >
-                {item.tipo}
+                {disciplineType(item.tipo)}
               </Typography>
             </T.Column>
             <T.Column>
@@ -89,7 +90,7 @@ export function Table({ labels, data }: Props): ReactElement {
                   WebkitBoxOrient: "vertical",
                 }}
               >
-                {item.creditos}
+                {item.credito}
               </Typography>
             </T.Column>
             <T.Column>
