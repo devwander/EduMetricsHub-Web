@@ -1,6 +1,7 @@
 export * from "./auth.model";
 export * from "./base.model";
 export * from "./discipline.model";
+export * from "./discipline.progress.model";
 export * from "./icon.model";
 export * from "./modal.model";
 export * from "./paginate.model";

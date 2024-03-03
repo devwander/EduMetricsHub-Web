@@ -1,6 +1,9 @@
 import { ListElement, Modal } from "@/components";
 import ButtonsOptions from "@/components/buttons-options";
+import ProgressChar from "@/components/progress-chart";
 import { Color } from "@/lib";
+import { DisciplineProgress } from "@/models";
+import { useDisciplineProgressQuery } from "@/query";
 import { useDisciplineShowQuery } from "@/query/discipline.show.query";
 import { modalStore } from "@/store/modal.store";
 import { disciplineType } from "@/utils/format";
@@ -22,12 +25,38 @@ const list: ListElement[] = [
   },
 ];
 
+const formatDataProgress = (data: DisciplineProgress) => {
+  return [
+    {
+      label: "Estudaram",
+      value: data.num_studied,
+    },
+    {
+      label: "Estudando",
+      value: data.num_studying,
+    },
+    {
+      label: "Pendente (Obrigatório)",
+      value: data.num_missing_mandatory,
+    },
+    {
+      label: "Pendente (Eletiva)",
+      value: data.num_missing_elective,
+    },
+  ];
+};
+
 export function Info(): ReactElement {
   const { dataId } = modalStore();
   const [part, setPart] = useState("progress");
 
   const { data: disciplineData, isSuccess: isSuccessDiscipline } =
     useDisciplineShowQuery(Number(dataId));
+
+  const {
+    data: disciplineProgressData,
+    isSuccess: isSuccessDisciplineProgress,
+  } = useDisciplineProgressQuery(Number(dataId));
 
   return (
     <Modal.Root modalId="discipline-info">
@@ -38,6 +67,7 @@ export function Info(): ReactElement {
         >
           Informações
         </Typography>
+
         {isSuccessDiscipline && (
           <Box
             sx={{
@@ -92,6 +122,21 @@ export function Info(): ReactElement {
         )}
 
         <ButtonsOptions list={list} onChange={setPart} />
+
+        {part === "progress" && isSuccessDisciplineProgress && (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ProgressChar
+              dataset={formatDataProgress(disciplineProgressData)}
+            />
+          </Box>
+        )}
       </Modal.Body>
     </Modal.Root>
   );
