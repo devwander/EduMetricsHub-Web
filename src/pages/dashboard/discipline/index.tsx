@@ -1,20 +1,15 @@
-import { InputSearch, ListElement } from "@/components";
-import ButtonsOptions from "@/components/buttons-options";
+import { InputSearch } from "@/components";
 import { useDisciplinePaginateQuery } from "@/query";
 import { disciplineFilterStore, searchStore } from "@/store";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import ListIcon from "@mui/icons-material/List";
 import { Box, Grid, Pagination } from "@mui/material";
 import { Stack } from "@mui/system";
-import { useState, type ReactElement } from "react";
+import { type ReactElement } from "react";
+import { Modal } from "./modal";
 import { Table } from "./table";
 
 export function Discipline(): ReactElement {
   const { search } = searchStore();
   const { append, params } = disciplineFilterStore();
-
-  const [part, setPart] = useState("list");
 
   const { data: disciplines, isSuccess: isSuccessList } =
     useDisciplinePaginateQuery({
@@ -22,36 +17,14 @@ export function Discipline(): ReactElement {
       search,
     });
 
-  const list: ListElement[] = [
-    {
-      icon: ListIcon,
-      label: "Listagem",
-      value: "list",
-    },
-    {
-      icon: BarChartIcon,
-      label: "Progresso",
-      value: "progress",
-    },
-    {
-      icon: AutorenewIcon,
-      label: "Demanda",
-      value: "demand",
-    },
-  ];
-
   return (
     <Grid container spacing={2} sx={{ width: "100%", height: "100%" }}>
-      <Grid item xs={12}>
-        <ButtonsOptions list={list} onChange={setPart} />
-      </Grid>
-
       <Grid item xs={12}>
         <InputSearch placeholder="Pesquise por nome ou código" />
       </Grid>
 
       <Grid item xs={12}>
-        {part === "list" && isSuccessList && (
+        {isSuccessList && (
           <Box>
             <Stack>
               <Table
@@ -88,6 +61,7 @@ export function Discipline(): ReactElement {
           </Box>
         )}
       </Grid>
+      <Modal.Info />
     </Grid>
   );
 }

@@ -26,7 +26,7 @@ export default function ButtonsOptions({
     if (list[0].value) {
       setValue(list[0].value);
     }
-  });
+  }, []);
 
   return (
     <Box>
@@ -34,7 +34,7 @@ export default function ButtonsOptions({
         sx={{ borderRadius: "20px" }}
         showLabels
         value={value}
-        onChange={(event, newValue) => {
+        onChange={(_, newValue) => {
           setValue(newValue);
           if (onChange) {
             onChange(newValue);
