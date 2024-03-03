@@ -1,15 +1,19 @@
 import { api } from "@/lib";
+import { Discipline, Paginate } from "@/models";
 import { QueryDiscipline } from "@/models/params.model";
 
 export default class DisciplineService {
-  public async paginate(params: Partial<QueryDiscipline>): Promise<any> {
-    const { take = 10 } = params;
+  public async paginate(
+    params: Partial<QueryDiscipline>
+  ): Promise<Paginate<Discipline>> {
+    const { page, perPage } = params;
 
-    const { data } = await api.get<any>(`university/disciplines`, {
+    const { data: pagination } = await api.get<any>(`university/disciplines`, {
       params: {
-        take,
+        page,
+        perPage,
       },
     });
-    return data;
+    return pagination;
   }
 }
