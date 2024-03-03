@@ -5,9 +5,10 @@ import { disciplineFilterStore } from "@/store";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ListIcon from "@mui/icons-material/List";
-import { Grid, Pagination, Typography } from "@mui/material";
+import { Grid, Pagination } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState, type ReactElement } from "react";
+import { Table } from "./table";
 
 export function Discipline(): ReactElement {
   const { append, params } = disciplineFilterStore();
@@ -39,17 +40,17 @@ export function Discipline(): ReactElement {
   return (
     <Grid container spacing={2} sx={{ width: "100%", height: "100%" }}>
       <Grid item xs={12}>
-        {/* <BasicList list={list} /> */}
         <ButtonsOptions list={list} onChange={setPart} />
       </Grid>
 
       <Grid item xs={12}>
         {part === "list" && isSuccessList && disciplines.data.length > 0 && (
           <>
-            <Stack sx={{ padding: "0 0.5rem" }}>
-              {disciplines.data.map((discipline: any) => (
-                <Typography key={discipline.id}>{discipline.nome}</Typography>
-              ))}
+            <Stack>
+              <Table
+                labels={["Nome", "Código", "Tipo", "Créditos", "Carga Horária"]}
+                data={disciplines.data}
+              />
             </Stack>
 
             {disciplines.meta.total > disciplines.meta.perPage && (
