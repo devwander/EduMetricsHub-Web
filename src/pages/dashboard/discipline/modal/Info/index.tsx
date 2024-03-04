@@ -1,4 +1,4 @@
-import { ListElement, Modal } from "@/components";
+import { InfoContainer, ListElement, Modal } from "@/components";
 import BasicScatterChart from "@/components/basic-scatter-chart";
 import ButtonsOptions from "@/components/buttons-options";
 import ProgressChar from "@/components/progress-chart";
@@ -150,6 +150,11 @@ export function Info(): ReactElement {
             >
               Progresso da cadeira
             </Typography>
+            <InfoContainer
+              value={
+                "Este gráfico tem como objetivo indicar o progresso da máteria."
+              }
+            />
             <ProgressChar
               dataset={formatDataProgress(disciplineProgressData)}
             />
@@ -177,6 +182,11 @@ export function Info(): ReactElement {
               >
                 Oferta
               </Typography>
+              <InfoContainer
+                value={
+                  "Este gráfico tem como objetivo indicar a frequência de oferta da máteria."
+                }
+              />
               <BasicScatterChart data={disciplineOfferData} />
             </Box>
           </Box>
