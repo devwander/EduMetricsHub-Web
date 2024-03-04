@@ -1,10 +1,14 @@
 import { ListElement, Modal } from "@/components";
+import BasicScatterChart from "@/components/basic-scatter-chart";
 import ButtonsOptions from "@/components/buttons-options";
 import ProgressChar from "@/components/progress-chart";
 import { Color } from "@/lib";
 import { DisciplineProgress } from "@/models";
-import { useDisciplineProgressQuery } from "@/query";
-import { useDisciplineShowQuery } from "@/query/discipline.show.query";
+import {
+  useDisciplineOfferQuery,
+  useDisciplineProgressQuery,
+  useDisciplineShowQuery,
+} from "@/query";
 import { modalStore } from "@/store/modal.store";
 import { disciplineType } from "@/utils/format";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
@@ -57,6 +61,9 @@ export function Info(): ReactElement {
     data: disciplineProgressData,
     isSuccess: isSuccessDisciplineProgress,
   } = useDisciplineProgressQuery(Number(dataId));
+
+  const { data: disciplineOfferData, isSuccess: isSuccessDisciplineOffer } =
+    useDisciplineOfferQuery(Number(dataId));
 
   return (
     <Modal.Root modalId="discipline-info">
@@ -130,11 +137,48 @@ export function Info(): ReactElement {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              gap: "0.5rem",
             }}
           >
+            <Typography
+              sx={{
+                fontWeight: "500",
+                padding: "1rem 0 0 0",
+                fontSize: "1.5rem",
+                marginTop: "1.5rem",
+              }}
+            >
+              Progresso da cadeira
+            </Typography>
             <ProgressChar
               dataset={formatDataProgress(disciplineProgressData)}
             />
+          </Box>
+        )}
+
+        {part === "demand" && isSuccessDisciplineOffer && (
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.5rem",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontWeight: "500",
+                  padding: "1rem 0 0 0",
+                  fontSize: "1.5rem",
+                  marginTop: "1.5rem",
+                }}
+              >
+                Oferta
+              </Typography>
+              <BasicScatterChart data={disciplineOfferData} />
+            </Box>
           </Box>
         )}
       </Modal.Body>

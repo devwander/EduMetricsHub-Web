@@ -27,7 +27,7 @@ export default function ProgressChar({ dataset }: BarChartProps) {
       series={[{ dataKey: "value", label: "Alunos" }]}
       layout="horizontal"
       sx={{
-        padding: "5rem 0",
+        padding: "0 0 5rem 0",
       }}
       {...chartSetting}
     />

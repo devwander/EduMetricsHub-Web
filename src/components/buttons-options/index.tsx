@@ -26,7 +26,7 @@ export default function ButtonsOptions({
     if (list[0].value) {
       setValue(list[0].value);
     }
-  }, []);
+  }, [list]);
 
   return (
     <Box>

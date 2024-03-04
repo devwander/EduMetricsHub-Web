@@ -1,5 +1,10 @@
 import { api } from "@/lib";
-import { Discipline, DisciplineProgress, Paginate } from "@/models";
+import {
+  Discipline,
+  DisciplineOffer,
+  DisciplineProgress,
+  Paginate,
+} from "@/models";
 import { QueryDiscipline } from "@/models/params.model";
 
 export default class DisciplineService {
@@ -26,6 +31,13 @@ export default class DisciplineService {
   public async progress(id: string | number): Promise<DisciplineProgress> {
     const { data } = await api.get<DisciplineProgress>(
       `university/discipline/data/progress/${id}`
+    );
+    return data;
+  }
+
+  public async offer(id: string | number): Promise<DisciplineOffer[]> {
+    const { data } = await api.get<DisciplineOffer[]>(
+      `/university/discipline/data/offer/${id}`
     );
     return data;
   }
