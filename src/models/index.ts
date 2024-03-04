@@ -1,5 +1,6 @@
 export * from "./auth.model";
 export * from "./base.model";
+export * from "./discipline.demend.model";
 export * from "./discipline.model";
 export * from "./discipline.offer.model";
 export * from "./discipline.progress.model";

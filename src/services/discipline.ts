@@ -1,6 +1,7 @@
 import { api } from "@/lib";
 import {
   Discipline,
+  DisciplineDemend,
   DisciplineOffer,
   DisciplineProgress,
   Paginate,
@@ -40,5 +41,12 @@ export default class DisciplineService {
       `/university/discipline/data/offer/${id}`
     );
     return data;
+  }
+
+  public async demend(id: string | number): Promise<DisciplineDemend> {
+    const { data } = await api.get<DisciplineDemend[]>(
+      `/university/discipline/data/demand/${id}`
+    );
+    return data[0];
   }
 }

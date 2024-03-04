@@ -5,6 +5,7 @@ import ProgressChar from "@/components/progress-chart";
 import { Color } from "@/lib";
 import { DisciplineProgress } from "@/models";
 import {
+  useDisciplineDemendQuery,
   useDisciplineOfferQuery,
   useDisciplineProgressQuery,
   useDisciplineShowQuery,
@@ -64,6 +65,9 @@ export function Info(): ReactElement {
 
   const { data: disciplineOfferData, isSuccess: isSuccessDisciplineOffer } =
     useDisciplineOfferQuery(Number(dataId));
+
+  const { data: disciplineDemandData, isSuccess: isSuccessDisciplineDemand } =
+    useDisciplineDemendQuery(Number(dataId));
 
   return (
     <Modal.Root modalId="discipline-info">
@@ -161,8 +165,8 @@ export function Info(): ReactElement {
           </Box>
         )}
 
-        {part === "demand" && isSuccessDisciplineOffer && (
-          <Box>
+        <Box>
+          {part === "demand" && isSuccessDisciplineOffer && (
             <Box
               sx={{
                 display: "flex",
@@ -189,8 +193,43 @@ export function Info(): ReactElement {
               />
               <BasicScatterChart data={disciplineOfferData} />
             </Box>
-          </Box>
-        )}
+          )}
+          {part === "demand" && isSuccessDisciplineDemand && (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.5rem",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontWeight: "500",
+                  padding: "1rem 0 0 0",
+                  fontSize: "1.5rem",
+                }}
+              >
+                Demanda
+              </Typography>
+              <InfoContainer value={"Informa a demanda da máteria."} />
+              <Typography
+                sx={{
+                  fontSize: "2rem",
+                  backgroundColor: Color.NEUTRAL_11,
+                  borderRadius: "10px",
+                  padding: "1rem",
+                  marginTop: "0.5rem",
+                  fontWeight: "500",
+                  color: Color.GREEN_FINAL_01,
+                }}
+              >
+                {disciplineDemandData.demanda} alunos
+              </Typography>
+            </Box>
+          )}
+        </Box>
       </Modal.Body>
     </Modal.Root>
   );
