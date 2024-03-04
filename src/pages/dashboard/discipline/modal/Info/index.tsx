@@ -10,12 +10,13 @@ import {
   useDisciplineProgressQuery,
   useDisciplineShowQuery,
 } from "@/query";
+import { useDisciplineMenuStore } from "@/store";
 import { modalStore } from "@/store/modal.store";
 import { disciplineType } from "@/utils/format";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import { Box, Typography } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
 const list: ListElement[] = [
   {
@@ -53,7 +54,10 @@ const formatDataProgress = (data: DisciplineProgress) => {
 
 export function Info(): ReactElement {
   const { dataId } = modalStore();
-  const [part, setPart] = useState("progress");
+
+  const currentScreen = useDisciplineMenuStore(
+    (state: any) => state.currentScreen
+  );
 
   const { data: disciplineData, isSuccess: isSuccessDiscipline } =
     useDisciplineShowQuery(Number(dataId));
@@ -132,9 +136,9 @@ export function Info(): ReactElement {
           </Box>
         )}
 
-        <ButtonsOptions list={list} onChange={setPart} />
+        <ButtonsOptions list={list} />
 
-        {part === "progress" && isSuccessDisciplineProgress && (
+        {currentScreen === "progress" && isSuccessDisciplineProgress && (
           <Box
             sx={{
               display: "flex",
@@ -166,7 +170,7 @@ export function Info(): ReactElement {
         )}
 
         <Box>
-          {part === "demand" && isSuccessDisciplineOffer && (
+          {currentScreen === "demand" && isSuccessDisciplineOffer && (
             <Box
               sx={{
                 display: "flex",
@@ -194,7 +198,7 @@ export function Info(): ReactElement {
               <BasicScatterChart data={disciplineOfferData} />
             </Box>
           )}
-          {part === "demand" && isSuccessDisciplineDemand && (
+          {currentScreen === "demand" && isSuccessDisciplineDemand && (
             <Box
               sx={{
                 display: "flex",

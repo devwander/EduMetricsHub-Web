@@ -1,12 +1,12 @@
+import { useDisciplineMenuStore } from "@/store";
 import { SvgIconTypeMap } from "@mui/material";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Box from "@mui/material/Box";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-import React, { createElement, useEffect } from "react";
+import { createElement, useEffect } from "react";
 
 interface ButtonsOptionsProps {
-  onChange: (value: string) => void;
   list: ListElement[];
 }
 
@@ -16,15 +16,17 @@ export type ListElement = {
   value: string;
 };
 
-export default function ButtonsOptions({
-  list,
-  onChange,
-}: ButtonsOptionsProps) {
-  const [value, setValue] = React.useState<string>("");
+export default function ButtonsOptions({ list }: ButtonsOptionsProps) {
+  const currentScreen = useDisciplineMenuStore(
+    (state: any) => state.currentScreen
+  );
+  const setCurrentScreen = useDisciplineMenuStore(
+    (state: any) => state.setCurrentScreen
+  );
 
   useEffect(() => {
     if (list[0].value) {
-      setValue(list[0].value);
+      setCurrentScreen(list[0].value);
     }
   }, [list]);
 
@@ -33,12 +35,9 @@ export default function ButtonsOptions({
       <BottomNavigation
         sx={{ borderRadius: "20px" }}
         showLabels
-        value={value}
+        value={currentScreen}
         onChange={(_, newValue) => {
-          setValue(newValue);
-          if (onChange) {
-            onChange(newValue);
-          }
+          setCurrentScreen(newValue);
         }}
       >
         {list.map((item, index) => (
