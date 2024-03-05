@@ -14,13 +14,16 @@ export default class DisciplineService {
   ): Promise<Paginate<Discipline>> {
     const { page, perPage, search } = params;
 
-    const { data: pagination } = await api.get<any>(`university/disciplines`, {
-      params: {
-        page,
-        perPage,
-        search,
-      },
-    });
+    const { data: pagination } = await api.get<Paginate<Discipline>>(
+      `university/disciplines`,
+      {
+        params: {
+          page,
+          perPage,
+          search,
+        },
+      }
+    );
     return pagination;
   }
 
