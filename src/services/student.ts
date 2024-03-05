@@ -1,15 +1,23 @@
 import { api } from "@/lib";
+import { Paginate, Student } from "@/models";
 import { QueryStudent } from "@/models/params.model";
 
 export default class StudentService {
-  public async paginate(params: Partial<QueryStudent>): Promise<any> {
-    const { take = 10 } = params;
+  public async paginate(
+    params: Partial<QueryStudent>
+  ): Promise<Paginate<Student>> {
+    const { page, perPage, search } = params;
 
-    const { data } = await api.get<any>(`university/students`, {
-      params: {
-        take,
-      },
-    });
-    return data;
+    const { data: pagination } = await api.get<Paginate<Student>>(
+      `university/students`,
+      {
+        params: {
+          page,
+          perPage,
+          search,
+        },
+      }
+    );
+    return pagination;
   }
 }
