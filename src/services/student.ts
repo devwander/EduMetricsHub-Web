@@ -20,4 +20,9 @@ export default class StudentService {
     );
     return pagination;
   }
+
+  public async show(id: string | number): Promise<Student> {
+    const { data } = await api.get<Student>(`university/student/${id}`);
+    return data;
+  }
 }

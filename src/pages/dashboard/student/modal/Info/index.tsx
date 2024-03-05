@@ -1,18 +1,9 @@
 import { InfoContainer, ListElement, Modal } from "@/components";
-import BasicScatterChart from "@/components/basic-scatter-chart";
 import ButtonsOptions from "@/components/buttons-options";
-import ProgressChar from "@/components/progress-chart";
 import { Color } from "@/lib";
-import { DisciplineProgress } from "@/models";
-import {
-  useDisciplineDemendQuery,
-  useDisciplineOfferQuery,
-  useDisciplineProgressQuery,
-  useDisciplineShowQuery,
-} from "@/query";
-import { useDisciplineMenuStore } from "@/store";
+import { useStudentShowQuery } from "@/query";
+import { useStudentMenuStore } from "@/store";
 import { modalStore } from "@/store/modal.store";
-import { disciplineType } from "@/utils/format";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import { Box, Typography } from "@mui/material";
@@ -31,50 +22,18 @@ const list: ListElement[] = [
   },
 ];
 
-const formatDataProgress = (data: DisciplineProgress) => {
-  return [
-    {
-      label: "Estudaram",
-      value: data.num_studied,
-    },
-    {
-      label: "Estudando",
-      value: data.num_studying,
-    },
-    {
-      label: "Pendente (Obrigatório)",
-      value: data.num_missing_mandatory,
-    },
-    {
-      label: "Pendente (Eletiva)",
-      value: data.num_missing_elective,
-    },
-  ];
-};
-
 export function Info(): ReactElement {
   const { dataId } = modalStore();
 
-  const currentScreen = useDisciplineMenuStore(
+  const currentScreen = useStudentMenuStore(
     (state: any) => state.currentScreen
   );
 
-  const { data: disciplineData, isSuccess: isSuccessDiscipline } =
-    useDisciplineShowQuery(Number(dataId));
-
-  const {
-    data: disciplineProgressData,
-    isSuccess: isSuccessDisciplineProgress,
-  } = useDisciplineProgressQuery(Number(dataId));
-
-  const { data: disciplineOfferData, isSuccess: isSuccessDisciplineOffer } =
-    useDisciplineOfferQuery(Number(dataId));
-
-  const { data: disciplineDemandData, isSuccess: isSuccessDisciplineDemand } =
-    useDisciplineDemendQuery(Number(dataId));
+  const { data: studentData, isSuccess: isSuccessStudent } =
+    useStudentShowQuery(Number(dataId));
 
   return (
-    <Modal.Root modalId="discipline-info">
+    <Modal.Root modalId="student-info">
       <Modal.Header />
       <Modal.Body>
         <Typography
@@ -83,7 +42,7 @@ export function Info(): ReactElement {
           Informações
         </Typography>
 
-        {isSuccessDiscipline && (
+        {isSuccessStudent && (
           <Box
             sx={{
               backgroundColor: Color.GREEN_FINAL_03,
@@ -110,35 +69,29 @@ export function Info(): ReactElement {
             }}
           >
             <Typography>
-              <span style={{ fontWeight: "500" }}>Id:</span> {disciplineData.id}
+              <span style={{ fontWeight: "500" }}>Id:</span> {studentData.id}
             </Typography>
             <Typography>
-              <span style={{ fontWeight: "500" }}>Carga horária:</span>{" "}
-              {disciplineData.carga_horaria}
+              <span style={{ fontWeight: "500" }}>CPF:</span> {studentData.cpf}
             </Typography>
             <Typography>
-              <span style={{ fontWeight: "500" }}>Código:</span>{" "}
-              {disciplineData.codigo}
+              <span style={{ fontWeight: "500" }}>Arg:</span>{" "}
+              {studentData.arg_class}
             </Typography>
             <Typography>
               <span style={{ fontWeight: "500" }}>Nome:</span>{" "}
-              {disciplineData.nome}
-            </Typography>
-
-            <Typography>
-              <span style={{ fontWeight: "500" }}>Crédito:</span>{" "}
-              {disciplineData.credito}
+              {studentData.nome}
             </Typography>
             <Typography>
-              <span style={{ fontWeight: "500" }}>Tipo:</span>{" "}
-              {disciplineType(disciplineData.tipo)}
+              <span style={{ fontWeight: "500" }}>Ano de entrada:</span>{" "}
+              {studentData.ano_entrada}
             </Typography>
           </Box>
         )}
 
-        <ButtonsOptions list={list} persist="disciplines" />
+        <ButtonsOptions list={list} persist="students" />
 
-        {currentScreen === "progress" && isSuccessDisciplineProgress && (
+        {currentScreen === "progress" && (
           <Box
             sx={{
               display: "flex",
@@ -163,14 +116,14 @@ export function Info(): ReactElement {
                 "Este gráfico tem como objetivo indicar o progresso da máteria."
               }
             />
-            <ProgressChar
+            {/* <ProgressChar
               dataset={formatDataProgress(disciplineProgressData)}
-            />
+            /> */}
           </Box>
         )}
 
         <Box>
-          {currentScreen === "demand" && isSuccessDisciplineOffer && (
+          {currentScreen === "demand" && (
             <Box
               sx={{
                 display: "flex",
@@ -195,10 +148,10 @@ export function Info(): ReactElement {
                   "Este gráfico tem como objetivo indicar a frequência de oferta da máteria."
                 }
               />
-              <BasicScatterChart data={disciplineOfferData} />
+              {/* <BasicScatterChart data={disciplineOfferData} /> */}
             </Box>
           )}
-          {currentScreen === "demand" && isSuccessDisciplineDemand && (
+          {currentScreen === "demand" && (
             <Box
               sx={{
                 display: "flex",
@@ -229,7 +182,7 @@ export function Info(): ReactElement {
                   color: Color.GREEN_FINAL_01,
                 }}
               >
-                {disciplineDemandData.demanda} alunos
+                {/* {disciplineDemandData.demanda} alunos */}
               </Typography>
             </Box>
           )}

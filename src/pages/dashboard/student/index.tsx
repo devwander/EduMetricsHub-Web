@@ -3,6 +3,7 @@ import { useStudentPaginateQuery } from "@/query";
 import { searchStore, studentFilterStore } from "@/store";
 import { Box, Grid, Pagination, Stack } from "@mui/material";
 import type { ReactElement } from "react";
+import { Modal } from "./modal";
 import { Table } from "./table";
 
 export function Student(): ReactElement {
@@ -51,7 +52,7 @@ export function Student(): ReactElement {
           </Box>
         )}
       </Grid>
-      {/* <Modal.Info /> */}
+      <Modal.Info />
     </Grid>
   );
 }
