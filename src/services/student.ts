@@ -1,5 +1,11 @@
 import { api } from "@/lib";
-import { Paginate, Student, StudentHistoric, StudentProgress } from "@/models";
+import {
+  Paginate,
+  Student,
+  StudentHistoric,
+  StudentHoursPerSemester,
+  StudentProgress,
+} from "@/models";
 import { QueryStudent } from "@/models/params.model";
 
 export default class StudentService {
@@ -36,6 +42,15 @@ export default class StudentService {
   public async historic(id: string | number): Promise<StudentHistoric> {
     const { data } = await api.get<StudentHistoric>(
       `university/student/data/historic/${id}`
+    );
+    return data;
+  }
+
+  public async hoursPerSemester(
+    id: string | number
+  ): Promise<StudentHoursPerSemester> {
+    const { data } = await api.get<StudentHoursPerSemester>(
+      `university/student/data/hoursPerSemester/${id}`
     );
     return data;
   }

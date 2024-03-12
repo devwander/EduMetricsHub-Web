@@ -1,15 +1,5 @@
 import { BarChart } from "@mui/x-charts/BarChart";
 
-// const chartSetting = {
-//   xAxis: [
-//     {
-//       label: "Alunos",
-//     },
-//   ],
-//   width: 900,
-//   height: 500,
-// };
-
 type progressItem = {
   label: string;
   value: number;

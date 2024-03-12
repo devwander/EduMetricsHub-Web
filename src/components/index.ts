@@ -1,4 +1,5 @@
 export * from "./app-bar";
+export * from "./bar-chart";
 export * from "./basic-scatter-chart";
 export * from "./buttons-options";
 export * from "./info-container";

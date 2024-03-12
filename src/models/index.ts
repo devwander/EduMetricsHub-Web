@@ -10,6 +10,7 @@ export * from "./paginate.model";
 export * from "./params.model";
 export * from "./route.model";
 export * from "./student.historic.model";
+export * from "./student.hoursPerSemester.model";
 export * from "./student.model";
 export * from "./student.progress.model";
 export * from "./user.model";

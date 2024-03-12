@@ -1,10 +1,12 @@
 import { InfoContainer, ListElement, Modal } from "@/components";
+import BarChart from "@/components/bar-chart";
 import ButtonsOptions from "@/components/buttons-options";
 import ProgressChar from "@/components/progress-chart";
 import { Color } from "@/lib";
 import { StudentProgress } from "@/models";
 import {
   useStudentHistoricQuery,
+  useStudentHoursPerSemesterQuery,
   useStudentProgressQuery,
   useStudentShowQuery,
 } from "@/query";
@@ -65,6 +67,11 @@ export function Info(): ReactElement {
 
   const { data: studentHistoricData, isSuccess: isSuccessStudentHistoric } =
     useStudentHistoricQuery(Number(dataId));
+
+  const {
+    data: studentHoursPerSemesterData,
+    isSuccess: isSuccessStudentHours,
+  } = useStudentHoursPerSemesterQuery(Number(dataId));
 
   return (
     <Modal.Root modalId="student-info">
@@ -201,41 +208,36 @@ export function Info(): ReactElement {
                 </Box>
               </Box>
             )}
-          {currentScreen === "demand" && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <Typography
+
+          {currentScreen === "historic" &&
+            isSuccessStudentHours &&
+            studentHoursPerSemesterData && (
+              <Box
                 sx={{
-                  fontWeight: "500",
-                  padding: "1rem 0 0 0",
-                  fontSize: "1.5rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.5rem",
                 }}
               >
-                Demanda
-              </Typography>
-              <InfoContainer value={"Informa a demanda da máteria."} />
-              <Typography
-                sx={{
-                  fontSize: "2rem",
-                  backgroundColor: Color.NEUTRAL_11,
-                  borderRadius: "10px",
-                  padding: "1rem",
-                  marginTop: "0.5rem",
-                  fontWeight: "500",
-                  color: Color.GREEN_FINAL_01,
-                }}
-              >
-                {/* {disciplineDemandData.demanda} alunos */}
-              </Typography>
-            </Box>
-          )}
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    padding: "1rem 0 0 0",
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  Horas por semestre
+                </Typography>
+                <InfoContainer
+                  value={"Informa as horas cursadas por semestre."}
+                />
+                <Box>
+                  <BarChart dataset={studentHoursPerSemesterData} />
+                </Box>
+              </Box>
+            )}
         </Box>
       </Modal.Body>
     </Modal.Root>
