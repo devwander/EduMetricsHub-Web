@@ -1,5 +1,5 @@
 import { api } from "@/lib";
-import { Paginate, Student } from "@/models";
+import { Paginate, Student, StudentProgress } from "@/models";
 import { QueryStudent } from "@/models/params.model";
 
 export default class StudentService {
@@ -23,6 +23,13 @@ export default class StudentService {
 
   public async show(id: string | number): Promise<Student> {
     const { data } = await api.get<Student>(`university/student/${id}`);
+    return data;
+  }
+
+  public async progress(id: string | number): Promise<StudentProgress> {
+    const { data } = await api.get<StudentProgress>(
+      `university/student/data/progress/${id}`
+    );
     return data;
   }
 }

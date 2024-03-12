@@ -164,6 +164,7 @@ export function Info(): ReactElement {
               }
             />
             <ProgressChar
+              labelX="Alunos"
               dataset={formatDataProgress(disciplineProgressData)}
             />
           </Box>

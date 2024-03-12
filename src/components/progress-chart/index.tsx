@@ -1,14 +1,14 @@
 import { BarChart } from "@mui/x-charts/BarChart";
 
-const chartSetting = {
-  xAxis: [
-    {
-      label: "Alunos",
-    },
-  ],
-  width: 900,
-  height: 500,
-};
+// const chartSetting = {
+//   xAxis: [
+//     {
+//       label: "Alunos",
+//     },
+//   ],
+//   width: 900,
+//   height: 500,
+// };
 
 type progressItem = {
   label: string;
@@ -17,19 +17,23 @@ type progressItem = {
 
 type BarChartProps = {
   dataset: progressItem[];
+  labelX: string;
 };
 
-export default function ProgressChar({ dataset }: BarChartProps) {
+export default function ProgressChar({ dataset, labelX }: BarChartProps) {
   return (
     <BarChart
       dataset={dataset}
       yAxis={[{ scaleType: "band", dataKey: "label" }]}
-      series={[{ dataKey: "value", label: "Alunos" }]}
+      xAxis={[{ scaleType: "linear", dataKey: "value", label: labelX }]}
+      series={[{ dataKey: "value", label: labelX }]}
+      width={900}
+      height={500}
       layout="horizontal"
       sx={{
         padding: "0 0 5rem 0",
       }}
-      {...chartSetting}
+      // {...chartSetting}
     />
   );
 }

@@ -1,7 +1,9 @@
 import { InfoContainer, ListElement, Modal } from "@/components";
 import ButtonsOptions from "@/components/buttons-options";
+import ProgressChar from "@/components/progress-chart";
 import { Color } from "@/lib";
-import { useStudentShowQuery } from "@/query";
+import { StudentProgress } from "@/models";
+import { useStudentProgressQuery, useStudentShowQuery } from "@/query";
 import { useStudentMenuStore } from "@/store";
 import { modalStore } from "@/store/modal.store";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
@@ -22,6 +24,27 @@ const list: ListElement[] = [
   },
 ];
 
+const formatDataProgress = (data: StudentProgress) => {
+  return [
+    {
+      label: "Estudou",
+      value: data.num_studied,
+    },
+    {
+      label: "Estudando",
+      value: data.num_studying,
+    },
+    {
+      label: "Pendente (Obrigatório)",
+      value: data.num_missing_mandatory,
+    },
+    {
+      label: "Pendente (Eletiva)",
+      value: data.num_missing_elective,
+    },
+  ];
+};
+
 export function Info(): ReactElement {
   const { dataId } = modalStore();
 
@@ -31,6 +54,9 @@ export function Info(): ReactElement {
 
   const { data: studentData, isSuccess: isSuccessStudent } =
     useStudentShowQuery(Number(dataId));
+
+  const { data: studentProgressData, isSuccess: isSuccessStudentProgress } =
+    useStudentProgressQuery(Number(dataId));
 
   return (
     <Modal.Root modalId="student-info">
@@ -91,7 +117,7 @@ export function Info(): ReactElement {
 
         <ButtonsOptions list={list} persist="students" />
 
-        {currentScreen === "progress" && (
+        {currentScreen === "progress" && studentProgressData && (
           <Box
             sx={{
               display: "flex",
@@ -116,9 +142,10 @@ export function Info(): ReactElement {
                 "Este gráfico tem como objetivo indicar o progresso da máteria."
               }
             />
-            {/* <ProgressChar
-              dataset={formatDataProgress(disciplineProgressData)}
-            /> */}
+            <ProgressChar
+              labelX="Disciplinas"
+              dataset={formatDataProgress(studentProgressData)}
+            />
           </Box>
         )}
 
