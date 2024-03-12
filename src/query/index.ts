@@ -8,3 +8,4 @@ export * from "./student.hoursPerSemester.query";
 export * from "./student.paginate.query";
 export * from "./student.process.query";
 export * from "./student.show.query";
+export * from "./user.paginate.query";

@@ -6,3 +6,4 @@ export * from "./modal.store";
 export * from "./search.store";
 export * from "./student.filter.store";
 export * from "./student.menu.store";
+export * from "./user.filter.store";
