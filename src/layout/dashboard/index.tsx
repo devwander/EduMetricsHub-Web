@@ -10,7 +10,8 @@ export function Dashboard(): ReactElement {
     <Box
       sx={{
         paddingTop: "5.1875rem",
-        backgroundColor: Color.NEUTRAL_13,
+        // backgroundColor: Color.NEUTRAL_13,
+        background: 'url("/rose-petals.svg")',
       }}
     >
       <AppBar />

@@ -7,7 +7,7 @@ type MuiButtonProps = Components<Omit<Theme, "components">>["MuiButton"];
 export const MuiButton: MuiButtonProps = {
   styleOverrides: {
     root: {
-      borderRadius: 28,
+      borderRadius: 14,
       textTransform: "none",
       boxShadow: "none",
       minHeight: 52,

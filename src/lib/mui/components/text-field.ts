@@ -8,12 +8,10 @@ type MuiTextFieldProps = Components<Omit<Theme, "components">>["MuiTextField"];
 export const MuiTextField: MuiTextFieldProps = {
   styleOverrides: {
     root: {
-      borderRadius: 28,
       backgroundColor: Color.NEUTRAL_12,
       minHeight: 52,
 
       [`& .${inputBaseClasses.root}`]: {
-        borderRadius: 28,
         minHeight: 52,
 
         [`& .${inputBaseClasses.input}`]: {

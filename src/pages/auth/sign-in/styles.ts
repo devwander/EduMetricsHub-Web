@@ -1,17 +1,13 @@
 import { Box, Container, Stack, styled } from "@mui/material";
 
-import { Color } from "@/lib";
-
 export const Layout = styled(Container)(() => ({
   height: "inherit",
-  width: "inherit",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   flexDirection: "column",
   gap: "3.125rem",
   overflow: "hidden",
-  backgroundColor: Color.NEUTRAL_14,
   userSelect: "none",
 }));
 

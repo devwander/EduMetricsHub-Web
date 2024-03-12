@@ -63,6 +63,21 @@ export function Home(): ReactElement {
         eficiente e gratificante. Junte-se a nós nessa jornada de aprimoramento
         contínuo e excelência educacional.
       </Typography>
+
+      <Box
+        sx={{
+          margin: "0 auto",
+          width: "100%",
+          display: "flex",
+          alignContent: "center",
+        }}
+      >
+        <img
+          style={{ margin: "0 auto" }}
+          src="https://www.upe.br/images/industrix/project/caruaru2.png"
+          alt="Logo UPE, campus Caruaru"
+        />
+      </Box>
     </Box>
   );
 }
