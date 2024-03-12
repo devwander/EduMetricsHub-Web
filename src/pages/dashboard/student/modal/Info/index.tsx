@@ -3,13 +3,18 @@ import ButtonsOptions from "@/components/buttons-options";
 import ProgressChar from "@/components/progress-chart";
 import { Color } from "@/lib";
 import { StudentProgress } from "@/models";
-import { useStudentProgressQuery, useStudentShowQuery } from "@/query";
+import {
+  useStudentHistoricQuery,
+  useStudentProgressQuery,
+  useStudentShowQuery,
+} from "@/query";
 import { useStudentMenuStore } from "@/store";
 import { modalStore } from "@/store/modal.store";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import { Box, Typography } from "@mui/material";
 import { ReactElement } from "react";
+import { DisciplinesTable } from "./disciplines-table";
 
 const list: ListElement[] = [
   {
@@ -18,16 +23,16 @@ const list: ListElement[] = [
     value: "progress",
   },
   {
-    icon: AutorenewIcon,
-    label: "Demanda",
-    value: "demand",
+    icon: TextSnippetIcon,
+    label: "Histórico",
+    value: "historic",
   },
 ];
 
 const formatDataProgress = (data: StudentProgress) => {
   return [
     {
-      label: "Estudou",
+      label: "Concluiu",
       value: data.num_studied,
     },
     {
@@ -57,6 +62,9 @@ export function Info(): ReactElement {
 
   const { data: studentProgressData, isSuccess: isSuccessStudentProgress } =
     useStudentProgressQuery(Number(dataId));
+
+  const { data: studentHistoricData, isSuccess: isSuccessStudentHistoric } =
+    useStudentHistoricQuery(Number(dataId));
 
   return (
     <Modal.Root modalId="student-info">
@@ -117,40 +125,9 @@ export function Info(): ReactElement {
 
         <ButtonsOptions list={list} persist="students" />
 
-        {currentScreen === "progress" && studentProgressData && (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "0.5rem",
-            }}
-          >
-            <Typography
-              sx={{
-                fontWeight: "500",
-                padding: "1rem 0 0 0",
-                fontSize: "1.5rem",
-                marginTop: "1.5rem",
-              }}
-            >
-              Progresso da cadeira
-            </Typography>
-            <InfoContainer
-              value={
-                "Este gráfico tem como objetivo indicar o progresso da máteria."
-              }
-            />
-            <ProgressChar
-              labelX="Disciplinas"
-              dataset={formatDataProgress(studentProgressData)}
-            />
-          </Box>
-        )}
-
-        <Box>
-          {currentScreen === "demand" && (
+        {currentScreen === "progress" &&
+          isSuccessStudentProgress &&
+          studentProgressData && (
             <Box
               sx={{
                 display: "flex",
@@ -168,16 +145,62 @@ export function Info(): ReactElement {
                   marginTop: "1.5rem",
                 }}
               >
-                Oferta
+                Progresso do aluno
               </Typography>
               <InfoContainer
                 value={
-                  "Este gráfico tem como objetivo indicar a frequência de oferta da máteria."
+                  "Este gráfico tem como objetivo indicar o progresso do estudante."
                 }
               />
-              {/* <BasicScatterChart data={disciplineOfferData} /> */}
+              <ProgressChar
+                labelX="Disciplinas"
+                dataset={formatDataProgress(studentProgressData)}
+              />
             </Box>
           )}
+
+        <Box>
+          {currentScreen === "historic" &&
+            isSuccessStudentHistoric &&
+            studentHistoricData && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    padding: "1rem 0 0 0",
+                    fontSize: "1.5rem",
+                    marginTop: "1.5rem",
+                  }}
+                >
+                  Histórico do aluno
+                </Typography>
+                <InfoContainer
+                  value={
+                    "A tabela abaixo lista as disciplinas cursadas pelo aluno."
+                  }
+                />
+                <Box
+                  sx={{
+                    height: "20rem",
+                    overflow: "auto",
+                    marginTop: ".5rem",
+                  }}
+                >
+                  <DisciplinesTable
+                    data={studentHistoricData}
+                    labels={["Nome", "Ano", "Semestre", "Status", "Nota"]}
+                  />
+                </Box>
+              </Box>
+            )}
           {currentScreen === "demand" && (
             <Box
               sx={{
