@@ -11,7 +11,7 @@ export function AppBar(): ReactElement {
   return (
     <Fragment>
       <MuiAppBar position="fixed" color="default">
-        <Container maxWidth="md">
+        <Container maxWidth="xl">
           <Toolbar sx={{ padding: 0 }}>
             <MenuButton />
             <Navbar.Desktop />
