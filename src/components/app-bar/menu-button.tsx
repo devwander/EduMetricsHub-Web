@@ -16,7 +16,7 @@ export function MenuButton(): ReactElement {
       onClick={toggle}
       sx={{ display: { md: "none" } }}
     >
-      <MenuIcon weight="bold" color={Color.GREEN_FINAL_01} />
+      <MenuIcon weight="bold" color={Color.GREEN_01} />
     </IconButton>
   );
 }

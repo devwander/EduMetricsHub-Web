@@ -121,7 +121,7 @@ export function Table({ labels, data }: Props): ReactElement {
                   justifyContent: "flex-end",
 
                   svg: {
-                    fill: Color.GREEN_FINAL_01,
+                    fill: Color.GREEN_01,
 
                     ":hover": {
                       cursor: "pointer",

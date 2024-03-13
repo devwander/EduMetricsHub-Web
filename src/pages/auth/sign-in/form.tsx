@@ -158,14 +158,14 @@ export function Form(): ReactElement {
         variant="contained"
         fullWidth
         size="large"
-        sx={{ backgroundColor: Color.GREEN_FINAL_01 }}
+        sx={{ backgroundColor: Color.GREEN_01 }}
       >
         Entrar
       </Button>
 
       {isPending && (
         <Backdrop sx={{ zIndex: 9999 }} open={isPending && !isError}>
-          <CircularProgress sx={{ color: Color.GREEN_FINAL_02 }} />
+          <CircularProgress sx={{ color: Color.GREEN_02 }} />
         </Backdrop>
       )}
     </S.Form>

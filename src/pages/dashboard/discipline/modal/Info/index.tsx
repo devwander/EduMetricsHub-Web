@@ -86,7 +86,7 @@ export function Info(): ReactElement {
         {isSuccessDiscipline && (
           <Box
             sx={{
-              backgroundColor: Color.GREEN_FINAL_03,
+              backgroundColor: Color.GREEN_03,
               borderRadius: "10px",
               padding: "1rem",
               margin: "1rem auto",
@@ -227,7 +227,7 @@ export function Info(): ReactElement {
                   padding: "1rem",
                   marginTop: "0.5rem",
                   fontWeight: "500",
-                  color: Color.GREEN_FINAL_01,
+                  color: Color.GREEN_01,
                 }}
               >
                 {disciplineDemandData.demanda} alunos

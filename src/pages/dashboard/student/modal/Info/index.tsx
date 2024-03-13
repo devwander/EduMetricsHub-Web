@@ -86,7 +86,7 @@ export function Info(): ReactElement {
         {isSuccessStudent && (
           <Box
             sx={{
-              backgroundColor: Color.GREEN_FINAL_03,
+              backgroundColor: Color.GREEN_03,
               borderRadius: "10px",
               padding: "1rem",
               margin: "1rem auto",

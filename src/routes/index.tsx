@@ -79,7 +79,7 @@ export function Router(): ReactElement {
             height: "100vh",
           }}
         >
-          <CircularProgress sx={{ color: Color.GREEN_FINAL_01 }} size={100} />
+          <CircularProgress sx={{ color: Color.GREEN_01 }} size={100} />
         </Stack>
       }
     >

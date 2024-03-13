@@ -7,7 +7,7 @@ export const Palette: PaletteOptions = {
     main: Color.RED_01,
   },
   primary: {
-    main: Color.GREEN_FINAL_01,
+    main: Color.GREEN_01,
   },
   background: {
     default: Color.NEUTRAL_14,

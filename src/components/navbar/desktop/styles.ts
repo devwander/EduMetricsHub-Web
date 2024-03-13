@@ -24,12 +24,12 @@ export const DesktopLink = styled(Button)(() => ({
 
   "&:hover": {
     color: Color.NEUTRAL_02,
-    background: `linear-gradient(180deg, ${Color.GREEN_FINAL_03} 0%, rgba(255,255,255,0) 100%)`,
+    background: `linear-gradient(180deg, ${Color.GREEN_03} 0%, rgba(255,255,255,0) 100%)`,
   },
 
   "&.active": {
     color: Color.NEUTRAL_02,
-    background: `linear-gradient(180deg, ${Color.GREEN_FINAL_03} 0%, rgba(255,255,255,0) 100%)`,
+    background: `linear-gradient(180deg, ${Color.GREEN_03} 0%, rgba(255,255,255,0) 100%)`,
   },
 
   "&.MuiButtonBase-root": {

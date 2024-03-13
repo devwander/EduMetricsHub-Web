@@ -15,9 +15,9 @@ export const MobileLink = styled(Button)(() => ({
   color: Color.NEUTRAL_02,
 
   "&.active": {
-    color: Color.GREEN_FINAL_01,
-    borderColor: Color.GREEN_FINAL_01,
-    background: `linear-gradient(180deg, ${Color.GREEN_FINAL_02} 0%, rgba(255,255,255,0) 100%)`,
+    color: Color.GREEN_01,
+    borderColor: Color.GREEN_01,
+    background: `linear-gradient(180deg, ${Color.GREEN_02} 0%, rgba(255,255,255,0) 100%)`,
   },
 }));
 

@@ -8,7 +8,7 @@ type MuiTableHeadProps = Components<Omit<Theme, "components">>["MuiTableHead"];
 export const MuiTableHead: MuiTableHeadProps = {
   styleOverrides: {
     root: {
-      backgroundColor: Color.GREEN_FINAL_03,
+      backgroundColor: Color.GREEN_03,
       [`& .${tableCellClasses.root}`]: {
         paddingTop: "1rem",
       },
