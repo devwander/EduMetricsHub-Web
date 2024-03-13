@@ -10,9 +10,11 @@ export const MuiTextField: MuiTextFieldProps = {
     root: {
       backgroundColor: Color.NEUTRAL_12,
       minHeight: 52,
+      borderRadius: "10px",
 
       [`& .${inputBaseClasses.root}`]: {
         minHeight: 52,
+        borderRadius: "10px",
 
         [`& .${inputBaseClasses.input}`]: {
           color: Color.NEUTRAL_02,
