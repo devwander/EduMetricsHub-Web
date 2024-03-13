@@ -4,6 +4,7 @@ import type { ReactElement } from "react";
 import { Table as T } from "@/components";
 import { Color } from "@/lib";
 import { StudentHistoric } from "@/models";
+import { disciplineStatus } from "@/utils/format";
 
 interface Props {
   labels: string[];
@@ -84,7 +85,7 @@ export function DisciplinesTable({ labels, data }: Props): ReactElement {
                   WebkitBoxOrient: "vertical",
                 }}
               >
-                {item.status}
+                {disciplineStatus(item.status)}
               </Typography>
             </T.Column>
             <T.Column>
